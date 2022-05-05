@@ -11,5 +11,9 @@ class GetImg(object):
     def get_baiduimg(self):
         pass
 
+    def getother(self):
+        pass
+
+
 if __name__ == '__main__':
     pass
