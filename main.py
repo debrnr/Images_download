@@ -5,7 +5,8 @@
 from main_par import HEADER
 
 class GetImg(object):
-    """ 获取图片并下载 """
+    """ 获取图片并下载
+    """
 
     def __init__(self):
         pass
