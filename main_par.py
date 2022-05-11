@@ -1,5 +1,5 @@
 # #!/usr/bin/env python
-# -*- coding: UTF-8 -*- 
+# -*- coding: UTF-8 -*-
 # On 2022/5/5 22:20 Debrnr used the main_par written by PyCharm on Gamer
 
 from random import randint
