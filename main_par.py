@@ -4,6 +4,7 @@
 
 from random import randint
 from time import time
+from urllib.parse import quote
 
 
 class Dd(object):
@@ -31,56 +32,90 @@ class Dd(object):
         return str(randint(int('0' * num), int('9' * num)))
 
 
-HEADER = {
-    'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
-    'Chrome/100.0.4896.127 Safari/537.36'
-}
+class WebSiteParames(object):
+    """ WebSiteParames 网站参数设置 """
+    HEADER = {
+        'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+        'Chrome/100.0.4896.127 Safari/537.36'
+    }
+    # ---- IMG_SITE_URL
+    URL = 'https://image.baidu.com/search/acjson'
+    # ---- URL_PAR
+    PARS = {
+        'tn': 'resultjson_com',
+        'logid': Dd.rint(19),
+        'ipn': 'rj',
+        'ct': '201326592',
+        'is': '',
+        'fp': 'result',
+        'fr': '',
+        'word': '',
+        'queryWord': '',
+        'cl': 2,
+        'lm': -1,
+        'ie': 'utf-8',
+        'oe': 'utf-8',
+        'adpicid': ' ',
+        'st': -1,
+        'z': '',
+        'ic': 0,
+        'hd': '',
+        'latest': '',
+        'copyright': '',
+        's': '',
+        'se': '',
+        'tab': '',
+        'width': '',
+        'height': '',
+        'face': 0,
+        'istype': 2,
+        'qc': '',
+        'nc': 1,
+        'expermode': '',
+        'nojc': '',
+        'isAsync': '',
+        'pn': '',
+        'rn': 30,
+        'gsm': '1e',
+        Dd.timenum(13): '',
+    }
+    PARS_SETTING = 'word,pn'
 
-# ---- IMG_SITE_URL
-BAIDU_IMG_URL = 'https://image.baidu.com/search/acjson'
+    def __init__(self):
+        self.url = WebSiteParames.URL
+        self.parames = WebSiteParames.PARS
+        self.headers = WebSiteParames.HEADER
+        self.set = WebSiteParames.PARS_SETTING
 
-# ---- URL_PAR
-BAIDU_PAR = {
-    'tn': 'resultjson_com',
-    'logid': Dd.rint(19),
-    'ipn': 'rj',
-    'ct': '201326592',
-    'is': '',
-    'fp': 'result',
-    'fr': '',
-    'word': '',
-    'queryWord': '',
-    'cl': 2,
-    'lm': -1,
-    'ie': 'utf-8',
-    'oe': 'utf-8',
-    'adpicid': ' ',
-    'st': -1,
-    'z': '',
-    'ic': 0,
-    'hd': '',
-    'latest': '',
-    'copyright': '',
-    's': '',
-    'se': '',
-    'tab': '',
-    'width': '',
-    'height': '',
-    'face': 0,
-    'istype': 2,
-    'qc': '',
-    'nc': 1,
-    'expermode': '',
-    'nojc': '',
-    'isAsync': '',
-    'pn': '',
-    'rn': 30,
-    'gsm': '1e',
-    Dd.timenum(13): '',
-}
+    def generate_the_url(self, *args):
+        set = self.set.split(',') if self.set.split(',') else list(self.set)
+        if len(args) > 0:
+            for key, velue in zip(set, args):
+                print(velue)
+        #         self.parames[key] = velue if velue.isdigit() or velue.isalpha() else quote(velue)
+        # return self.url + '?' + '&'.join(i.strip() for i in ['{}={}'.format(i,j) for i,j in self.parames.items()])
+
+    @classmethod
+    def headers(cls):
+        return cls.HEADER
+
+    @classmethod
+    def wurl(cls, par=None):
+        cls.URL = par
+
+    @classmethod
+    def wparames(cls, par=None):
+        cls.PARS = par
+
+    @classmethod
+    def wheaders(cls, par=None):
+        cls.HEADER = par
+
+    @classmethod
+    def wset(cls, par=None):
+        cls.PARS_SETTING = par
+
 
 if __name__ == '__main__':
-    print(Dd.rint(19), len(Dd.rint(19)))
-    print(Dd.timenum(13), len(Dd.timenum(13)))
-    print(len('1651760807517'))
-    print(BAIDU_PAR)
+    wsp = WebSiteParames()
+    print(wsp.generate_the_url('天启,2'))
